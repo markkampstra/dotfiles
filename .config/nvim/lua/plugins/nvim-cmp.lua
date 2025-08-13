@@ -244,6 +244,14 @@ return {
             cmp.complete()
           end
         end, { "i", "s" }),
+        -- ["<CR>"] = cmp.mapping(function(fallback)
+        --   if cmp.visible() then
+        --     local entry = cmp.get_selected_entry()
+        --     confirm(entry)
+        --   else
+        --     fallback()
+        --   end
+        -- end, { "i", "s"}),
       },
       completion = {
         completeopt = "menu,menuone,noinsert",
@@ -254,10 +262,10 @@ return {
         end,
       },
       sources = cmp.config.sources({
+        { name = "buffer" },
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "nvim_lua" },
-        { name = "buffer" },
         { name = "calc" },
         { name = "emoji" },
         { name = "path" },

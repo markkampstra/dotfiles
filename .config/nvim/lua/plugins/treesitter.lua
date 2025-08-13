@@ -17,7 +17,7 @@ return {
         additional_vim_regex_highlighting = true,
       },
       -- indent = { enable = true, disable = { "yaml", "ruby" } },
-      indent = { enable = true, disable = { "" } },
+      indent = { enable = true, disable = { "yaml", "ruby" } },
       context_commentstring = {
         enable = true,
         enable_autocmd = false,

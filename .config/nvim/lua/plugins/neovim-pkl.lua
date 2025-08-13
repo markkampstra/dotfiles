@@ -1,3 +1,4 @@
+if true then return {} end
 return {
   "https://github.com/apple/pkl-neovim",
   lazy = true,

@@ -1,16 +1,48 @@
-if true then return {} end
+-- if true then return {} end
+-- return {
+--   "jayadamsmorgan/PklLanguageServer",
+--   build = "mv Editors/Neovim/pklls-nvim/* .",
+--   config = function()
+--     -- local capabilities = require("cmp_nvim_lsp").default_capabilities() -- if you are using nvim_cmp for completion
+--     require("pklls-nvim.init").setup({
+--       capabilities = capabilities, -- change or remove this
+--       -- on_attach = custom_on_attach -- change or remove this
+--       -- cmd = custom_path_to_pkl_lsp_server
+--     })
+--   end,
+--   dependencies = {
+--     "neovim/nvim-lspconfig",
+--   },
+-- }
 return {
-  "jayadamsmorgan/PklLanguageServer",
-  build = "mv Editors/Neovim/pklls-nvim/* .",
-  config = function()
-    -- local capabilities = require("cmp_nvim_lsp").default_capabilities() -- if you are using nvim_cmp for completion
-    require("pklls-nvim.init").setup({
-      capabilities = capabilities, -- change or remove this
-      -- on_attach = custom_on_attach -- change or remove this
-      -- cmd = custom_path_to_pkl_lsp_server
-    })
-  end,
+  "apple/pkl-neovim",
+  lazy = true,
+  ft = "pkl",
   dependencies = {
-    "neovim/nvim-lspconfig",
+    {
+      "nvim-treesitter/nvim-treesitter",
+      build = function(_)
+        vim.cmd("TSUpdate")
+      end,
+    },
+    "L3MON4D3/LuaSnip",
   },
+  build = function()
+    require('pkl-neovim').init()
+
+    -- Set up syntax highlighting.
+    vim.cmd("TSInstall pkl")
+  end,
+  config = function()
+    -- Set up snippets.
+    require("luasnip.loaders.from_snipmate").lazy_load()
+
+    -- Configure pkl-lsp
+    vim.g.pkl_neovim = {
+      start_command = { "/opt/homebrew/opt/openjdk@23/bin/java", "-jar", "/Users/mark//Development/LanguageServers/PKL LSP 0.3.2.jar" },
+      -- or if pkl-lsp is installed with brew:
+      -- start_command = { "pkl-lsp" },
+      pkl_cli_path = "/opt/homebrew/bin/pkl"
+    }
+  end,
 }
