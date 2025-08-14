@@ -217,3 +217,5 @@ export PATH="$HOME/.local/bin:$PATH"
 # Task Master aliases added on 8/12/2025
 alias tm='task-master'
 alias taskmaster='task-master'
+
+alias claude="/Users/Mark.Kampstra/.claude/local/claude"
