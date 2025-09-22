@@ -123,7 +123,7 @@ bindkey -e
 # set -o vi
 
 # enable autojump "j"
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 
 # aliases
@@ -174,6 +174,7 @@ alias ibrew='arch -x86_64 /usr/local/bin/brew'
 function dssh() { docker exec -it $1 bash }
 function dssha() { docker exec -it $1 sh }
 function resource { source ~/.zshrc }
+function config { lv ~/.zshrc }
 
 export DOKKU_HOST=dokku.meervorm.nl
 export DOKKU_PORT=22
@@ -214,8 +215,14 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # claude
 export PATH="$HOME/.local/bin:$PATH"
 
+# psql (+ Postgres commandline tools)
+export PATH="/Library/PostgreSQL/16/bin/:$PATH"
+
 # Task Master aliases added on 8/12/2025
 alias tm='task-master'
 alias taskmaster='task-master'
 
 alias claude="/Users/Mark.Kampstra/.claude/local/claude"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
