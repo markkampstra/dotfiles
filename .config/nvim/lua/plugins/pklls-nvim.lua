@@ -39,7 +39,7 @@ return {
 
     -- Configure pkl-lsp
     vim.g.pkl_neovim = {
-      start_command = { "/opt/homebrew/opt/openjdk@23/bin/java", "-jar", "/Users/mark//Development/LanguageServers/PKL LSP 0.3.2.jar" },
+      start_command = { "/opt/homebrew/opt/openjdk/bin/java", "-jar", "/Users/Mark.Kampstra/Development/LanguageServers/pkl-lsp-0.4.0.jar" },
       -- or if pkl-lsp is installed with brew:
       -- start_command = { "pkl-lsp" },
       pkl_cli_path = "/opt/homebrew/bin/pkl"

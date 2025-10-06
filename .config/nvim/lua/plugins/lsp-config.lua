@@ -2,6 +2,15 @@ local lspconfig = require("lspconfig")
 
 return {
   "neovim/nvim-lspconfig",
+  dependencies = {
+    --[[
+      Workaround for Mason change
+      https://github.com/LazyVim/LazyVim/issues/6039#issuecomment-2856227817
+    ]]--
+    -- { 'mason-org/mason.nvim', config = true, version = "^1.0.0" }, -- NOTE: Must be loaded before dependants
+    -- { 'mason-org/mason-lspconfig.nvim', version = "^1.0.0" },
+    -- 'WhoIsSethDaniel/mason-tool-installer.nvim',
+  },
   opts = {
     diagnostics = {
       virtual_text = false,
