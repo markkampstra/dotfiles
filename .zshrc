@@ -213,7 +213,7 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # claude
-export PATH="$HOME/.local/bin:$PATH"
+# export PATH="$HOME/.local/bin:$PATH"
 
 # psql (+ Postgres commandline tools)
 export PATH="/Library/PostgreSQL/16/bin/:$PATH"
