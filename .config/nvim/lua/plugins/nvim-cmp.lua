@@ -262,15 +262,16 @@ return {
         end,
       },
       sources = cmp.config.sources({
-        { name = "buffer" },
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "nvim_lua" },
-        { name = "calc" },
-        { name = "emoji" },
-        { name = "path" },
+        { name = "nvim_lsp", priority = 1000 },
+        { name = "luasnip", priority = 750 },
+        { name = "buffer", priority = 500 },
+        { name = "nvim_lua", priority = 400 },
+        { name = "path", priority = 300 },
+        { name = "calc", priority = 200 },
+        { name = "emoji", priority = 100 },
         {
           name = "spell",
+          priority = 50,
           option = {
             keep_all_entries = false,
             enable_in_context = function()
