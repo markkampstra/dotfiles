@@ -222,7 +222,6 @@ export PATH="/Library/PostgreSQL/16/bin/:$PATH"
 alias tm='task-master'
 alias taskmaster='task-master'
 
-alias claude="/Users/Mark.Kampstra/.claude/local/claude"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"

@@ -17,6 +17,12 @@ return {
       underline = false,
     },
     servers = {
+      -- Global LSP keymaps for all servers
+      ['*'] = {
+        keys = {
+          { "gl", '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>', desc = "Open diagnostic float" },
+        },
+      },
       rubocop = {
         -- See: https://docs.rubocop.org/rubocop/usage/lsp.html
         cmd = { "bundle", "exec", "rubocop", "--lsp" },
@@ -88,11 +94,6 @@ return {
       end,
     },
   },
-  init = function()
-    local keys = require("lazyvim.plugins.lsp.keymaps").get()
-    -- change a keymap
-    keys[#keys + 1] = { "gl", '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>' }
-  end,
 }
 -- local nvim_lsp = require("lspconfig")
 --  nvim_lsp.solargraph.setup {
