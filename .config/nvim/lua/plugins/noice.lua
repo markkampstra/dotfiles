@@ -20,6 +20,12 @@ return {
         on_open = function(win)
           vim.api.nvim_win_set_config(win, { focusable = false })
         end,
+        -- Position in bottom right
+        top_down = false,
+        -- Faster timeout (milliseconds)
+        timeout = 2000,
+        -- Faster animation stages
+        stages = "fade",
       },
     },
   },
