@@ -225,3 +225,7 @@ alias taskmaster='task-master'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Claude container
+export PATH="$PATH:$HOME/.local/bin"
+# [ -s "$HOME/.local/share/bash-completion/completions/claude-container" ] && source "$HOME/.local/share/bash-completion/completions/claude-container"

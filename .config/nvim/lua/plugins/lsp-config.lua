@@ -33,13 +33,20 @@ return {
         useBundler = true,
       },
 
-      pkl = {
-        cmd = { "/opt/homebrew/opt/openjdk/bin/java", "-jar", "/Users/Mark.Kampstra/Development/LanguageServers/pkl-lsp-0.4.0.jar" },
-        filetypes = { "pkl" },
-        root_dir = lspconfig.util.root_pattern("PklProject", "PklProject.deps.json", ".git"),
-      },
+      -- NOTE: Pkl LSP is now managed by lua/plugins/pkl.lua (using official pkl-neovim plugin)
+      -- The new config uses the Pkl CLI's built-in LSP: `pkl lsp` command
+      -- If you prefer the JAR-based LSP, uncomment below and remove pkl.lua
+      -- pkl = {
+      --   cmd = { "/opt/homebrew/opt/openjdk/bin/java", "-jar", "/Users/Mark.Kampstra/Development/LanguageServers/pkl-lsp-0.4.0.jar" },
+      --   filetypes = { "pkl" },
+      --   root_dir = lspconfig.util.root_pattern("PklProject", "PklProject.deps.json", ".git"),
+      -- },
 
-      yamlls = {
+      -- NOTE: yamlls is now managed by yaml-companion.nvim in lua/plugins/kubernetes.lua
+      -- yaml-companion provides dynamic Kubernetes schema switching via Telescope
+      -- If you want to use this basic config instead, comment out yaml-companion in kubernetes.lua
+      -- and uncomment the yamlls config below
+      --[[ yamlls = {
         -- Have to add this for yamlls to understand that we support line folding
         capabilities = {
           textDocument = {
@@ -81,17 +88,18 @@ return {
             },
           },
         },
-      },
+      }, ]]--
     },
     setup = {
-      yamlls = function()
-        -- Neovim < 0.10 does not have dynamic registration for formatting
-        if vim.fn.has("nvim-0.10") == 0 then
-          LazyVim.lsp.on_attach(function(client, _)
-            client.server_capabilities.documentFormattingProvider = true
-          end, "yamlls")
-        end
-      end,
+      -- NOTE: yamlls setup is now handled by yaml-companion.nvim in kubernetes.lua
+      -- yamlls = function()
+      --   -- Neovim < 0.10 does not have dynamic registration for formatting
+      --   if vim.fn.has("nvim-0.10") == 0 then
+      --     LazyVim.lsp.on_attach(function(client, _)
+      --       client.server_capabilities.documentFormattingProvider = true
+      --     end, "yamlls")
+      --   end
+      -- end,
     },
   },
 }
