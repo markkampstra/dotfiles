@@ -222,10 +222,14 @@ export PATH="/Library/PostgreSQL/16/bin/:$PATH"
 alias tm='task-master'
 alias taskmaster='task-master'
 
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
 # Claude container
 export PATH="$PATH:$HOME/.local/bin"
-# [ -s "$HOME/.local/share/bash-completion/completions/claude-container" ] && source "$HOME/.local/share/bash-completion/completions/claude-container"
+
+# Added by Antigravity
+export PATH="/Users/mark/.antigravity/antigravity/bin:$PATH"
+
+# Autojump
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
