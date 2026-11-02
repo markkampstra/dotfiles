@@ -4,6 +4,6 @@
 local Util = require("lazyvim.util")
 local map = Util.safe_keymap_set
 
-map("v", "<C-c>", ":w !pbcopy<CR>", { desc = "Copy to clipboard" })
+map("v", "<C-c>", '"+y', { desc = "Copy to clipboard" })
 map("n", "<Leader>\\", LazyVim.pick("live_grep_glob"), { desc = "Live Grep Glob" })
 map("n", "<Leader>Y", ":call SearchYamlKey()<CR>", { desc = "YAML search key" })
