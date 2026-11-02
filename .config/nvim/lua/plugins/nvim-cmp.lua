@@ -168,6 +168,7 @@ return {
         ["<BS>"] = cmp.mapping(function()
           smart_bs()
         end, { "i", "s" }),
+        ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-e>"] = cmp.mapping(function(fallback)
           if cmp.visible() then

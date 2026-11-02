@@ -51,3 +51,16 @@ require("lazy").setup({
     },
   },
 })
+
+-- Auto-sync plugins on every startup: install missing, update to latest, clean removed.
+-- Registered here (during early init, before VeryLazy) so the listener is guaranteed to be
+-- attached when the event fires. Running on VeryLazy keeps the async git jobs off the
+-- critical startup path; `show = false` runs it in the background so Neovim stays usable.
+-- Some updates only take effect after the next restart.
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  once = true,
+  callback = function()
+    require("lazy").sync({ show = false })
+  end,
+})

@@ -233,3 +233,45 @@ export PATH="/Users/mark/.antigravity/antigravity/bin:$PATH"
 
 # Autojump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
+# fzf git cherry picker
+git_cherry_pick_files() {
+  local source_branch="${1:?Usage: git_cherry_pick_files <source_branch> <target_branch>}"
+  local target_branch="${2:?Usage: git_cherry_pick_files <source_branch> <target_branch>}"
+
+  git diff --name-only "$source_branch".."$target_branch" | \
+    fzf --multi --preview "git diff $source_branch..$target_branch -- {}" | \
+    while read -r file; do
+      if git ls-tree -r "$target_branch" --name-only | grep -qx "$file"; then
+        mkdir -p "$(dirname "$file")"
+        git show "$target_branch:$file" > "$file"
+        git add "$file"
+        echo "Copied: $file"
+      else
+        echo "Skipping (deleted in $target_branch): $file"
+      fi
+    done
+}
+
+# TODO items needing attention, shown in Warp once per half-day (am/pm split at 13:00, like the
+# launchd notifier). Runs from a one-shot precmd so p10k instant prompt sees no init output.
+# Design: ~/.claude/skills/todo/DESIGN.md
+if [[ -o interactive && "$TERM_PROGRAM" == "WarpTerminal" && -x ~/.claude/skills/todo/bin/todo ]]; then
+  _todo_warp_attention() {
+    add-zsh-hook -d precmd _todo_warp_attention
+    local stamp=~/.claude/todo/warp-shown slot attn n body
+    slot="$(date +%F)-$( (( $(date +%-H) < 13 )) && print am || print pm)"
+    [[ -r $stamp && "$(<$stamp)" == "$slot" ]] && return
+    attn="$(~/.claude/skills/todo/bin/todo attention 2>/dev/null)" || return
+    [[ -z $attn || $attn == "(nothing needs attention)" ]] && return
+    print -r -- "$slot" >| $stamp
+    n=${#${(f)attn}}
+    print -P "%F{yellow}TODO — $n need attention:%f"
+    print -r -- "$attn"
+    # OSC 777 splits title/body on ';' — strip it and control chars from the body
+    body="${${${(f)attn}[1]//;/,}//[[:cntrl:]]/}"
+    printf '\e]777;notify;%s;%s\a' "TODO: $n need attention" "$body"
+  }
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd _todo_warp_attention
+fi
